@@ -50,7 +50,7 @@ import {
 } from 'firebase/firestore';
 
 // --- Global Configuration ---
-const PROVIDED_GOOGLE_AI_KEY = "AIzaSyBkGtdHNHq8ZjAPzIza6DmiBIDK3atHMic";
+const PROVIDED_GOOGLE_AI_KEY = "AIzaSyDGAz8YDAJbE2ab35SvLpTPuk3i0O8E5zY";
 const DEFAULT_MODEL = "gemini-2.5-flash-preview-09-2025"; 
 
 const initialFirebaseConfig = {
