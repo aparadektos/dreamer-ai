@@ -51,7 +51,7 @@ import {
 
 // --- Global Configuration ---
 const PROVIDED_GOOGLE_AI_KEY = "AIzaSyDGAz8YDAJbE2ab35SvLpTPuk3i0O8E5zY";
-const DEFAULT_MODEL = "gemini-2.5-flash-preview-09-2025"; 
+const DEFAULT_MODEL = "gemini-1.5-flash"; 
 
 const initialFirebaseConfig = {
   apiKey: "AIzaSyDOKzFRXCErXJZ-FHzIrnaq0hIIbtj5G-o",
@@ -78,14 +78,35 @@ const SUPPORTED_LANGUAGES = [
 
 const UI_STRINGS = {
   en: {
-    appTitle: "Dreamer AI", tagline: "Decode your soul.", begin: "Join the Dream", resume: "Resume Journey", email: "Email Address", passkey: "Passkey", firstName: "First Name", lastName: "Last Name", login: "Login", join: "Create Identity", demoUser: "Try Demo Credentials", history: "Past Echoes", newDream: "New Dream", logout: "Logout", tapestry: "New Dream", placeholder: "Close your eyes... what did you see?", decipher: "Decipher Dream", weaving: "Weaving...", listening: "Capturing echoes...", return: "Return", symbols: "Arcane Symbols", reflection: "Reflection", adminNexus: "Admin Nexus", share: "Share your dream", logs: "Activity Logs", signup: "Sign Up", lexicon: "Global Lexicon", lexiconSearch: "Search 1,000+ symbols...", noResults: "The Lexicon is silent.", syncLexicon: "Sync Neural Dictionary", discoverAI: "AI Symbol Discovery", lastSync: "Last Subconscious Sync"
+    appTitle: "Dreamer AI", tagline: "Decode your soul.", begin: "Join the Dream", resume: "Resume Journey", email: "Email Address", passkey: "Passkey", firstName: "First Name", lastName: "Last Name", login: "Login", join: "Create Identity", demoUser: "Try Demo Credentials", history: "Past Echoes", newDream: "New Dream", logout: "Logout", tapestry: "New Dream", placeholder: "Close your eyes... what did you see?", decipher: "Decipher Dream", weaving: "Weaving...", listening: "Capturing echoes...", return: "Return", symbols: "Arcane Symbols", reflection: "Reflection", adminNexus: "Admin Nexus", share: "Share your dream", logs: "Activity Logs", signup: "Sign Up", lexicon: "Global Lexicon", lexiconSearch: "Search 1,000+ symbols...", noResults: "The Lexicon is silent.", syncLexicon: "Sync Neural Dictionary", discoverAI: "AI Symbol Discovery", lastSync: "Last Subconscious Sync",
+    hello: "Hello", dreamer: "Dreamer", weaveTab: "Weave", lexiconTab: "Lexicon", decipherBtn: "Decipher", searchSymbols: "Search symbols...",
+    about: "About", privacy: "Privacy Policy", terms: "Terms & Conditions", contact: "Contact us", generateLetter: "Discover symbols for"
   },
   el: {
-    appTitle: "Dreamer AI", tagline: "Αποκωδικοποίηση ψυχής.", begin: "Εγγραφή στο Όνειρο", resume: "Συνέχεια Ταξιδιού", email: "Email", passkey: "Κωδικός", firstName: "Όνομα", lastName: "Επώνυμο", login: "Είσοδος", join: "Δημιουργία Ταυτότητας", demoUser: "Δοκιμή Demo", history: "Παλιές Ηχώ", newDream: "Νέο Όνειρο", logout: "Αποσύνδεση", tapestry: "Νέο Όνειρο", placeholder: "Κλείστε τα μάτια... τι είδατε;", decipher: "Αποκρυπτογράφηση", weaving: "Ύφανση...", listening: "Καταγραφή...", return: "Επιστροφή", symbols: "Σύμβολα", reflection: "Στοχασμός", adminNexus: "Κέντρο Διαχείρισης", logs: "Καταγραφές", share: "Μοιραστείτε το όνειρό σας", signup: "Εγγραφή", lexicon: "Παγκόσμιο Λεξικό", lexiconSearch: "Αναζήτηση σε σύμβολα...", noResults: "Το Λεξικό σιωπά.", syncLexicon: "Συγχρονισμός Λεξικού", discoverAI: "Ανακάλυψη Συμβόλων AI", lastSync: "Τελευταίος Συγχρονισμός"
-  }
+    appTitle: "Dreamer AI", tagline: "Αποκωδικοποίηση ψυχής.", begin: "Εγγραφή στο Όνειρο", resume: "Συνέχεια Ταξιδιού", email: "Email", passkey: "Κωδικός", firstName: "Όνομα", lastName: "Επώνυμο", login: "Είσοδος", join: "Δημιουργία Ταυτότητας", demoUser: "Δοκιμή Demo", history: "Παλιές Ηχώ", newDream: "Νέο Όνειρο", logout: "Αποσύνδεση", tapestry: "Νέο Όνειρο", placeholder: "Κλείστε τα μάτια... τι είδατε;", decipher: "Αποκρυπτογράφηση", weaving: "Ύφανση...", listening: "Καταγραφή...", return: "Επιστροφή", symbols: "Σύμβολα", reflection: "Στοχασμός", adminNexus: "Κέντρο Διαχείρισης", logs: "Καταγραφές", share: "Μοιραστείτε το όνειρό σας", signup: "Εγγραφή", lexicon: "Παγκόσμιο Λεξικό", lexiconSearch: "Αναζήτηση σε σύμβολα...", noResults: "Το Λεξικό σιωπά.", syncLexicon: "Συγχρονισμός Λεξικού", discoverAI: "Ανακάλυψη Συμβόλων AI", lastSync: "Τελευταίος Συγχρονισμός",
+    hello: "Γεια σου", dreamer: "Ονειρευτή", weaveTab: "Ύφανση", lexiconTab: "Λεξικό", decipherBtn: "Αποκωδικοποίηση", searchSymbols: "Αναζήτηση συμβόλων...",
+    about: "Σχετικά", privacy: "Πολιτική Απορρήτου", terms: "Όροι Χρήσης", contact: "Επικοινωνία", generateLetter: "Ανακάλυψη συμβόλων για"
+  },
+  es: { hello: "Hola", dreamer: "Soñador", weaveTab: "Tejer", lexiconTab: "Léxico", decipherBtn: "Descifrar", about: "Acerca de", privacy: "Privacidad", terms: "Términos", contact: "Contacto", generateLetter: "Descubrir símbolos para", newDream: "Nuevo Sueño", history: "Historia", logout: "Salir" },
+  fr: { hello: "Bonjour", dreamer: "Rêveur", weaveTab: "Tisser", lexiconTab: "Lexique", decipherBtn: "Déchiffrer", about: "À propos", privacy: "Confidentialité", terms: "Conditions", contact: "Contact", generateLetter: "Découvrir les symboles pour", newDream: "Nouveau Rêve", history: "Histoire", logout: "Déconnexion" },
+  de: { hello: "Hallo", dreamer: "Träumer", weaveTab: "Weben", lexiconTab: "Lexikon", decipherBtn: "Entschlüsseln", about: "Über", privacy: "Datenschutz", terms: "Bedingungen", contact: "Kontakt", generateLetter: "Symbole entdecken für", newDream: "Neuer Traum", history: "Geschichte", logout: "Abmelden" },
+  it: { hello: "Ciao", dreamer: "Sognatore", weaveTab: "Tessere", lexiconTab: "Lessico", decipherBtn: "Decifrare", about: "Di", privacy: "Privacy", terms: "Termini", contact: "Contatti", generateLetter: "Scopri i simboli per", newDream: "Nuovo Sogno", history: "Storia", logout: "Esci" },
+  pt: { hello: "Olá", dreamer: "Sonhador", weaveTab: "Tecer", lexiconTab: "Léxico", decipherBtn: "Decifrar", about: "Sobre", privacy: "Privacidade", terms: "Termos", contact: "Contato", generateLetter: "Descobrir símbolos para", newDream: "Novo Sonho", history: "História", logout: "Sair" },
+  ja: { hello: "こんにちは", dreamer: "夢想家", weaveTab: "織る", lexiconTab: "辞書", decipherBtn: "解読する", about: "約", privacy: "プライバシー", terms: "規約", contact: "連絡先", generateLetter: "のシンボルを発見", newDream: "新しい夢", history: "歴史", logout: "ログアウト" }
 };
 
-const getUI = (lang, key) => UI_STRINGS[lang]?.[key] || UI_STRINGS['en'][key];
+const ALPHABETS = {
+  en: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  el: 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ'.split(''),
+  es: 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split(''),
+  fr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  de: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  it: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  pt: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+  ja: ['あ','か','さ','た','な','は','ま','や','ら','わ']
+};
+
+const getUI = (lang, key) => UI_STRINGS[lang]?.[key] || UI_STRINGS['en'][key] || UI_STRINGS['en'][key] || key;
 
 export default function App() {
   const [view, setView] = useState('auth'); 
@@ -120,6 +141,11 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('weave'); 
   const [isLexiconSyncing, setIsLexiconSyncing] = useState(false);
   const [lastSyncDate, setLastSyncDate] = useState(null);
+  const [selectedLetter, setSelectedLetter] = useState('A');
+
+  useEffect(() => {
+    setSelectedLetter(ALPHABETS[language][0]);
+  }, [language]);
 
   const authInstance = useRef(null);
   const dbInstance = useRef(null);
@@ -221,7 +247,7 @@ export default function App() {
       const promptText = `Mystical dream interpreter. Respond in ${activeLang}. User dream: "${dreamInput}". Output ONLY valid JSON: title, emotion, meaning (long paragraph), reflection (mystical question), symbols (array of {name, meaning}), visual_prompt (3D surreal scene prompt).`;
       const data = await fetchWithBackoff(`https://generativelanguage.googleapis.com/v1beta/models/${config.textModel}:generateContent?key=${config.googleAiKey}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }], generationConfig: { responseMimeType: "application/json" } })
+        body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
       });
       const result = JSON.parse(data.candidates[0].content.parts[0].text);
       setCurrentResult(result); setView('result');
@@ -241,17 +267,52 @@ export default function App() {
   const discoverNewSymbols = async (count = 5) => {
     setIsLexiconSyncing(true);
     try {
-      const prompt = `JSON array of ${count} dream symbols from world cultures. Format: [{item: 'Name', meaning: 'Interpretation'}]. JSON ONLY.`;
+      const prompt = `Return a JSON array of ${count} dream symbols from world cultures. The output must be ONLY a valid JSON array without any markdown formatting. Format: [{"item": "Name", "meaning": "Interpretation"}].`;
       const data = await fetchWithBackoff(`https://generativelanguage.googleapis.com/v1beta/models/${config.textModel}:generateContent?key=${config.googleAiKey}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json" } })
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
       });
-      const symbols = JSON.parse(data.candidates[0].content.parts[0].text);
+      let text = data.candidates[0].content.parts[0].text;
+      text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+      const symbols = JSON.parse(text);
       for (const s of symbols) {
-        await addDoc(collection(dbInstance.current, 'artifacts', config.appId, 'public', 'data', 'lexicon'), s);
+        await addDoc(collection(dbInstance.current, 'artifacts', config.appId, 'public', 'data', 'lexicon'), { ...s, language: 'en', startingLetter: String(s.item || '').charAt(0).toUpperCase() });
       }
       addLog(`Added ${symbols.length} symbols.`, "success");
-    } catch (err) { addLog(`Sync Error: ${err.message}`, "error"); }
+    } catch (err) { 
+      console.error("Discover Error:", err);
+      addLog(`Sync Error: ${err.message}`, "error"); 
+    }
+    finally { setIsLexiconSyncing(false); }
+  };
+
+  const discoverSymbolsForLetter = async (letter) => {
+    setIsLexiconSyncing(true);
+    try {
+      const activeLangName = SUPPORTED_LANGUAGES.find(l => l.code === language)?.name || "English";
+      const prompt = `Return a JSON array of 12 dream symbols starting with the letter '${letter}' in ${activeLangName}. The output must be ONLY a valid JSON array, without any markdown formatting. Format: [{"item": "Name", "meaning": "Interpretation"}].`;
+      const data = await fetchWithBackoff(`https://generativelanguage.googleapis.com/v1beta/models/${config.textModel}:generateContent?key=${config.googleAiKey}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      });
+      
+      console.log("Raw AI Output:", data);
+      let text = data.candidates[0].content.parts[0].text;
+      text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+      const symbols = JSON.parse(text);
+      
+      for (const s of symbols) {
+        await addDoc(collection(dbInstance.current, 'artifacts', config.appId, 'public', 'data', 'lexicon'), {
+          ...s,
+          language: language,
+          startingLetter: letter
+        });
+      }
+      addLog(`Added ${symbols.length} symbols for ${letter} in ${language}.`, "success");
+    } catch (err) { 
+      console.error("Discover Symbols Error:", err);
+      addLog(`Sync Error: ${err.message}`, "error"); 
+    }
     finally { setIsLexiconSyncing(false); }
   };
 
@@ -275,17 +336,43 @@ export default function App() {
   };
 
   const filteredLexicon = useMemo(() => {
-    if (lexiconSearch.length < 3) return [];
+    if (lexiconSearch.length >= 3) {
+      return lexiconData.filter(item => 
+        (item.language === language || !item.language) &&
+        (String(item.item || "").toLowerCase().includes(lexiconSearch.toLowerCase()) ||
+        String(item.meaning || "").toLowerCase().includes(lexiconSearch.toLowerCase()))
+      ).slice(0, 50);
+    }
     return lexiconData.filter(item => 
-      String(item.item || "").toLowerCase().includes(lexiconSearch.toLowerCase()) ||
-      String(item.meaning || "").toLowerCase().includes(lexiconSearch.toLowerCase())
-    ).slice(0, 50);
-  }, [lexiconSearch, lexiconData]);
+      item.language === language && 
+      item.startingLetter === selectedLetter
+    ).sort((a, b) => String(a.item || "").localeCompare(String(b.item || "")));
+  }, [lexiconSearch, lexiconData, language, selectedLetter]);
 
   const waveBackground = useMemo(() => (
-    <div className="fixed inset-0 -z-10 bg-[#2a1b4d] overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#3b2063] to-[#1a0b2e] opacity-95"></div>
-      <svg className="absolute bottom-0 w-full h-80 text-indigo-400/5" preserveAspectRatio="none" viewBox="0 0 1440 320"><path fill="currentColor" d="M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,128C672,139,768,213,864,229.3C960,245,1056,203,1152,181.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    <div className="fixed inset-0 -z-10 bg-[#1c1b3d] overflow-hidden">
+      {/* Soft night sky gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#2a1b4d] via-[#1a0b2e] to-[#0f0518] opacity-90"></div>
+      
+      {/* Dark Crescent Moon */}
+      <div className="absolute top-12 left-12 md:top-20 md:left-24 w-24 h-24 rounded-full shadow-[-15px_10px_0_0_rgba(165,180,252,0.2)] rotate-[-15deg] blur-[1px]"></div>
+      
+      {/* Twinkling Stars */}
+      <div className="absolute top-20 left-1/4 w-1 h-1 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]"></div>
+      <div className="absolute top-40 left-1/2 w-1.5 h-1.5 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]" style={{animationDelay: '1s'}}></div>
+      <div className="absolute top-32 right-1/3 w-1 h-1 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]" style={{animationDelay: '0.5s'}}></div>
+      <div className="absolute top-60 left-1/5 w-2 h-2 bg-indigo-200 rounded-full animate-pulse shadow-[0_0_15px_indigo]" style={{animationDelay: '1.5s'}}></div>
+      <div className="absolute top-10 left-1/2 w-1 h-1 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]" style={{animationDelay: '0.2s'}}></div>
+      <div className="absolute top-50 right-1/4 w-1 h-1 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]" style={{animationDelay: '0.8s'}}></div>
+
+      {/* Fluffy Clouds (SVG paths) */}
+      <svg className="absolute top-32 left-10 w-48 text-indigo-200/10" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5,17.5A4.5,4.5,0,0,1,6.5,8.5h.5A6.5,6.5,0,0,1,19.5,12h.5a3.5,3.5,0,0,1,0,7Z"/></svg>
+      <svg className="absolute top-48 right-1/3 w-64 text-indigo-300/5" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5,17.5A4.5,4.5,0,0,1,6.5,8.5h.5A6.5,6.5,0,0,1,19.5,12h.5a3.5,3.5,0,0,1,0,7Z"/></svg>
+      <svg className="absolute bottom-40 right-10 w-56 text-indigo-100/10" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5,17.5A4.5,4.5,0,0,1,6.5,8.5h.5A6.5,6.5,0,0,1,19.5,12h.5a3.5,3.5,0,0,1,0,7Z"/></svg>
+
+      {/* Layered waves at the bottom */}
+      <svg className="absolute bottom-0 w-full h-80 text-indigo-500/10" preserveAspectRatio="none" viewBox="0 0 1440 320"><path fill="currentColor" d="M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,128C672,139,768,213,864,229.3C960,245,1056,203,1152,181.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+      <svg className="absolute bottom-0 w-full h-60 text-indigo-400/20" preserveAspectRatio="none" viewBox="0 0 1440 320"><path fill="currentColor" d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
     </div>
   ), []);
 
@@ -339,16 +426,16 @@ export default function App() {
             <aside className={`fixed md:relative inset-y-0 left-0 z-40 w-80 bg-white/5 backdrop-blur-2xl border-r border-white/10 transition-all ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'} flex flex-col`}>
               <div className="p-8 space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-white font-black text-xl uppercase truncate">Hello {String(profile?.firstName || 'Dreamer')}!</h3>
+                  <h3 className="text-white font-black text-xl uppercase truncate">{getUI(language, 'hello')} {String(profile?.firstName || getUI(language, 'dreamer'))}!</h3>
                   <button onClick={() => setIsSidebarOpen(false)} className="md:hidden text-white/40"><X /></button>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => setActiveTab('weave')} className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase ${activeTab === 'weave' ? 'bg-white text-indigo-950' : 'bg-white/10 text-white/40'}`}>Weave</button>
-                  <button onClick={() => setActiveTab('lexicon')} className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase ${activeTab === 'lexicon' ? 'bg-white text-indigo-950' : 'bg-white/10 text-white/40'}`}>Lexicon</button>
+                  <button onClick={() => setActiveTab('weave')} className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase ${activeTab === 'weave' ? 'bg-white text-indigo-950' : 'bg-white/10 text-white/40'}`}>{getUI(language, 'weaveTab')}</button>
+                  <button onClick={() => setActiveTab('lexicon')} className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase ${activeTab === 'lexicon' ? 'bg-white text-indigo-950' : 'bg-white/10 text-white/40'}`}>{getUI(language, 'lexiconTab')}</button>
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto px-4 text-white">
-                <h2 className="px-4 py-2 text-[10px] font-black opacity-30 uppercase text-white">History</h2>
+                <h2 className="px-4 py-2 text-[10px] font-black opacity-30 uppercase text-white">{getUI(language, 'history')}</h2>
                 {history.map(item => (
                   <button key={item.id} onClick={() => {setCurrentResult(item); setView('result');}} className="w-full text-left p-4 rounded-2xl hover:bg-white/10 border border-transparent">
                     <span className="text-[10px] font-black uppercase text-indigo-300 mb-1 block">{String(item.emotion || "")}</span>
@@ -356,12 +443,12 @@ export default function App() {
                   </button>
                 ))}
               </div>
-              <div className="p-6 border-t border-white/10"><button onClick={() => signOut(authInstance.current)} className="flex items-center gap-2 opacity-30 hover:opacity-100 text-[10px] font-black transition-all text-white uppercase"><LogOut size={14} /> Logout</button></div>
+              <div className="p-6 border-t border-white/10"><button onClick={() => signOut(authInstance.current)} className="flex items-center gap-2 opacity-30 hover:opacity-100 text-[10px] font-black transition-all text-white uppercase"><LogOut size={14} /> {getUI(language, 'logout')}</button></div>
             </aside>
             <main className="flex-1 flex flex-col p-6 md:p-12 overflow-y-auto relative text-white">
               <header className="flex justify-between items-center mb-12">
                 <button onClick={() => setIsSidebarOpen(true)} className="md:hidden p-3 bg-white/10 rounded-xl"><Menu size={20}/></button>
-                <h2 className="text-3xl font-black uppercase text-white">{activeTab === 'weave' ? "New Dream" : "Lexicon"}</h2>
+                <h2 className="text-3xl font-black uppercase text-white">{activeTab === 'weave' ? getUI(language, 'newDream') : getUI(language, 'lexiconTab')}</h2>
                 <select value={language} onChange={e => setLanguage(e.target.value)} className="bg-white/10 border border-white/20 px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase outline-none text-white">
                   {SUPPORTED_LANGUAGES.map(l => <option key={l.code} value={l.code} className="bg-[#1a0b2e] text-white">{String(l.name)}</option>)}
                 </select>
@@ -372,26 +459,55 @@ export default function App() {
                     <textarea value={dreamInput} onChange={e => setDreamInput(e.target.value)} placeholder={getUI(language, 'placeholder')} className="w-full h-48 md:h-72 bg-transparent text-2xl md:text-5xl placeholder-white/5 outline-none resize-none font-medium text-white leading-tight" />
                     <div className="flex items-center gap-5">
                       <button onClick={weaveDream} disabled={isProcessing || dreamInput.length < 5} className="flex-1 bg-white text-indigo-950 font-black py-7 rounded-[2.5rem] text-2xl uppercase flex items-center justify-center gap-4 active:scale-95 transition-all">
-                        {isProcessing ? <span className="animate-pulse">Weaving...</span> : <><Send size={24} /> Decipher</>}
+                        {isProcessing ? <span className="animate-pulse">{getUI(language, 'weaving')}</span> : <><Send size={24} /> {getUI(language, 'decipherBtn')}</>}
                       </button>
                       <button onClick={handleToggleMic} className={`p-7 rounded-[2.5rem] border-2 transition-all ${isListening ? 'bg-red-500 border-red-400 text-white animate-pulse' : 'bg-white/10 border-white/20 text-indigo-200'}`}>{isListening ? <MicOff size={28} /> : <Mic size={28} />}</button>
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="max-w-4xl w-full mx-auto space-y-8 animate-in slide-in-from-bottom-6 pb-20 text-white">
-                  <div className="relative text-white/30"><Search className="absolute left-6 top-1/2 -translate-y-1/2" size={20} /><input type="text" value={lexiconSearch} onChange={e => setLexiconSearch(e.target.value)} placeholder="Search symbols..." className="w-full bg-white/5 border border-white/10 py-5 pl-14 pr-6 rounded-[2rem] text-xl text-white outline-none focus:border-indigo-500 transition-all" /></div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
-                    {lexiconSearch.length >= 3 && filteredLexicon.map((item, idx) => (
-                      <div key={idx} className="bg-white/5 p-8 rounded-[2.5rem] border border-white/10 text-white">
-                        <h3 className="text-lg font-black uppercase text-indigo-300 mb-2 tracking-widest flex items-center gap-2"><Sparkles size={16}/>{String(item.item || "")}</h3>
-                        <p className="text-sm opacity-60 italic text-white">"{String(item.meaning || "")}"</p>
-                      </div>
+                <div className="max-w-5xl w-full mx-auto space-y-8 animate-in slide-in-from-bottom-6 pb-20 text-white flex flex-col min-h-0 h-full">
+                  <div className="flex flex-wrap gap-2 justify-center pb-6">
+                    {ALPHABETS[language]?.map(letter => (
+                      <button key={letter} onClick={() => {setLexiconSearch(''); setSelectedLetter(letter);}} className={`w-10 h-10 rounded-xl font-bold text-lg flex items-center justify-center transition-all ${selectedLetter === letter && !lexiconSearch ? 'bg-indigo-500 text-white shadow-[0_0_15px_indigo]' : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white'}`}>
+                        {letter}
+                      </button>
                     ))}
-                    {lexiconSearch.length < 3 && <div className="col-span-full py-20 text-center opacity-20 uppercase font-black tracking-widest text-xs text-white">Enter 3 letters...</div>}
+                  </div>
+
+                  <div className="relative text-white/30 shrink-0"><Search className="absolute left-6 top-1/2 -translate-y-1/2" size={20} /><input type="text" value={lexiconSearch} onChange={e => setLexiconSearch(e.target.value)} placeholder={getUI(language, 'searchSymbols')} className="w-full bg-white/5 border border-white/10 py-5 pl-14 pr-6 rounded-[2rem] text-xl text-white outline-none focus:border-indigo-500 transition-all" /></div>
+                  
+                  <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 pb-12">
+                    {filteredLexicon.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {filteredLexicon.map((item, idx) => (
+                          <div key={idx} className="bg-white/5 p-8 rounded-[2.5rem] border border-white/10 text-white">
+                            <h3 className="text-lg font-black uppercase text-indigo-300 mb-2 tracking-widest flex items-center gap-2"><Sparkles size={16}/>{String(item.item || "")}</h3>
+                            <p className="text-sm opacity-60 italic text-white">"{String(item.meaning || "")}"</p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="py-20 text-center flex flex-col items-center justify-center gap-6">
+                        <span className="opacity-20 uppercase font-black tracking-widest text-xs text-white">{getUI(language, 'noResults') || "The Lexicon is silent."}</span>
+                        {!lexiconSearch && (
+                          <button onClick={() => discoverSymbolsForLetter(selectedLetter)} disabled={isLexiconSyncing} className="bg-indigo-600/50 hover:bg-indigo-600 px-8 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs flex items-center gap-3 transition-all disabled:opacity-50">
+                            <RefreshCw size={16} className={isLexiconSyncing ? 'animate-spin' : ''}/>
+                            {getUI(language, 'generateLetter')} {selectedLetter}
+                          </button>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
+              
+              <footer className="mt-auto py-6 border-t border-white/10 flex flex-wrap justify-center gap-6 opacity-60 text-[10px] font-black uppercase tracking-widest text-white/70 hover:opacity-100 transition-opacity z-10 shrink-0">
+                <a href="#" className="hover:text-white transition-colors">{getUI(language, 'about')}</a>
+                <a href="#" className="hover:text-white transition-colors">{getUI(language, 'privacy')}</a>
+                <a href="#" className="hover:text-white transition-colors">{getUI(language, 'terms')}</a>
+                <a href="#" className="hover:text-white transition-colors">{getUI(language, 'contact')}</a>
+              </footer>
             </main>
           </div>
         );
