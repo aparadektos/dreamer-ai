@@ -67,4 +67,26 @@ app.post('/api/etoro-proxy', async (req, res) => {
     }
 });
 
+// ─── Gemini AI Proxy ─────────────────────────────────────────────────────────
+// Routes all AI requests through the server to avoid browser CORS/firewall issues
+app.post('/api/gemini', async (req, res) => {
+    const { model, apiKey, body: geminiBody } = req.body;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    
+    writeLog(`Gemini Request: model=${model}`, 'AI');
+    try {
+        const response = await axios.post(url, geminiBody, {
+            headers: { 'Content-Type': 'application/json' },
+            timeout: 60000
+        });
+        writeLog(`✅ Gemini Success`, 'AI');
+        res.json(response.data);
+    } catch (error) {
+        const status = error.response?.status || 500;
+        const errMsg = JSON.stringify(error.response?.data || error.message);
+        writeLog(`❌ Gemini Error ${status}: ${errMsg}`, 'ERROR');
+        res.status(status).json(error.response?.data || { error: error.message });
+    }
+});
+
 app.listen(PORT, () => writeLog(`🚀 Proxy Server ready at http://localhost:${PORT}`, 'SYSTEM'));

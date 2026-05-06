@@ -49,21 +49,24 @@ import {
   doc
 } from 'firebase/firestore';
 
-// --- Global Configuration ---
-const PROVIDED_GOOGLE_AI_KEY = "AIzaSyDGAz8YDAJbE2ab35SvLpTPuk3i0O8E5zY";
-const DEFAULT_MODEL = "gemini-1.5-flash"; 
+// --- Global Configuration (loaded from .env file) ---
+const PROVIDED_GOOGLE_AI_KEY = import.meta.env.VITE_GOOGLE_AI_KEY || '';
+const DEFAULT_MODEL = import.meta.env.VITE_AI_MODEL || 'gemini-1.5-flash';
 
 const initialFirebaseConfig = {
-  apiKey: "AIzaSyDOKzFRXCErXJZ-FHzIrnaq0hIIbtj5G-o",
-  authDomain: "dreamer-ai-176ec.firebaseapp.com",
-  projectId: "dreamer-ai-176ec",
-  storageBucket: "dreamer-ai-176ec.firebasestorage.app",
-  messagingSenderId: "239120576843",
-  appId: "1:239120576843:web:74481c230fd488d2d138ce",
-  measurementId: "G-71918YCW4J"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-const initialAppId = 'dreamer-ai-176ec';
+const initialAppId = import.meta.env.VITE_FIREBASE_PROJECT_ID || 'dreamer-ai';
+
+const ADMIN_USER = import.meta.env.VITE_ADMIN_USER || 'admin';
+const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASS || 'admin';
 
 const SUPPORTED_LANGUAGES = [
   { code: 'en', name: 'English' },
@@ -224,6 +227,26 @@ export default function App() {
     } catch (err) { addLog(`Auto-Update Error: ${err.message}`, "error"); }
   };
 
+  // Routes AI calls through the local proxy server to bypass browser network restrictions
+  const PROXY_URL = 'http://localhost:3001';
+
+  const geminiRequest = async (promptText) => {
+    const res = await fetch(`${PROXY_URL}/api/gemini`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: config.textModel,
+        apiKey: config.googleAiKey,
+        body: { contents: [{ parts: [{ text: promptText }] }] }
+      })
+    });
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(`AI Error ${res.status}: ${JSON.stringify(errData)}`);
+    }
+    return res.json();
+  };
+
   const fetchWithBackoff = async (url, options, retries = 5) => {
     let delay = 1000;
     for (let i = 0; i < retries; i++) {
@@ -245,20 +268,13 @@ export default function App() {
     try {
       const activeLang = SUPPORTED_LANGUAGES.find(l => l.code === language)?.name || "English";
       const promptText = `Mystical dream interpreter. Respond in ${activeLang}. User dream: "${dreamInput}". Output ONLY valid JSON: title, emotion, meaning (long paragraph), reflection (mystical question), symbols (array of {name, meaning}), visual_prompt (3D surreal scene prompt).`;
-      const data = await fetchWithBackoff(`https://generativelanguage.googleapis.com/v1beta/models/${config.textModel}:generateContent?key=${config.googleAiKey}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
-      });
-      const result = JSON.parse(data.candidates[0].content.parts[0].text);
+      const data = await geminiRequest(promptText);
+      let rawText = data.candidates[0].content.parts[0].text;
+      rawText = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+      const result = JSON.parse(rawText);
       setCurrentResult(result); setView('result');
-      const imgData = await fetchWithBackoff(`https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${config.googleAiKey}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ instances: { prompt: `Surreal vision: ${result.visual_prompt}` }, parameters: { sampleCount: 1 } })
-      });
-      const imageUrl = `data:image/png;base64,${imgData.predictions[0].bytesBase64Encoded}`;
-      setCurrentResult(prev => ({ ...prev, imageUrl }));
       if (user && !user.isAnonymous) {
-        await addDoc(collection(dbInstance.current, 'artifacts', config.appId, 'users', user.uid, 'dreams'), { ...result, imageUrl, createdAt: serverTimestamp() });
+        await addDoc(collection(dbInstance.current, 'artifacts', config.appId, 'users', user.uid, 'dreams'), { ...result, createdAt: serverTimestamp() });
       }
     } catch (err) { setError(String(err.message)); }
     finally { setIsProcessing(false); }
@@ -268,10 +284,7 @@ export default function App() {
     setIsLexiconSyncing(true);
     try {
       const prompt = `Return a JSON array of ${count} dream symbols from world cultures. The output must be ONLY a valid JSON array without any markdown formatting. Format: [{"item": "Name", "meaning": "Interpretation"}].`;
-      const data = await fetchWithBackoff(`https://generativelanguage.googleapis.com/v1beta/models/${config.textModel}:generateContent?key=${config.googleAiKey}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-      });
+      const data = await geminiRequest(prompt);
       let text = data.candidates[0].content.parts[0].text;
       text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
       const symbols = JSON.parse(text);
@@ -291,16 +304,10 @@ export default function App() {
     try {
       const activeLangName = SUPPORTED_LANGUAGES.find(l => l.code === language)?.name || "English";
       const prompt = `Return a JSON array of 12 dream symbols starting with the letter '${letter}' in ${activeLangName}. The output must be ONLY a valid JSON array, without any markdown formatting. Format: [{"item": "Name", "meaning": "Interpretation"}].`;
-      const data = await fetchWithBackoff(`https://generativelanguage.googleapis.com/v1beta/models/${config.textModel}:generateContent?key=${config.googleAiKey}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-      });
-      
-      console.log("Raw AI Output:", data);
+      const data = await geminiRequest(prompt);
       let text = data.candidates[0].content.parts[0].text;
       text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
       const symbols = JSON.parse(text);
-      
       for (const s of symbols) {
         await addDoc(collection(dbInstance.current, 'artifacts', config.appId, 'public', 'data', 'lexicon'), {
           ...s,
@@ -563,7 +570,7 @@ export default function App() {
                     <ShieldCheck className="w-12 h-12 text-indigo-300 mx-auto" />
                     <input type="text" value={adminUser} onChange={e => setAdminUser(e.target.value)} placeholder="Nexus ID" className="w-full bg-white/5 border border-white/20 p-4 rounded-2xl outline-none text-white" />
                     <input type="password" value={adminPass} onChange={e => setAdminPass(e.target.value)} placeholder="Nexus Key" className="w-full bg-white/5 border border-white/20 p-4 rounded-2xl outline-none text-white" />
-                    <button onClick={() => { if(adminUser==='admin' && adminPass==='admin') setView('admin-panel'); }} className="w-full bg-indigo-600 py-4 rounded-2xl font-black uppercase text-white">Enter Nexus</button>
+                    <button onClick={() => { if(adminUser===ADMIN_USER && adminPass===ADMIN_PASS) setView('admin-panel'); }} className="w-full bg-indigo-600 py-4 rounded-2xl font-black uppercase text-white">Enter Nexus</button>
                     <button onClick={() => setView('auth')} className="w-full text-xs opacity-40 text-white">Cancel</button>
                   </div>
                 ) : (

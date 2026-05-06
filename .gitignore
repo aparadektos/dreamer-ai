@@ -1,2 +1,5 @@
 node_modules
 Log.txt
+.env
+.env.local
+.env.production
